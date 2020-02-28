@@ -1,0 +1,23 @@
+<ul class="post-hot clearfix">
+{% for k in remen %}
+    <li>
+        <div class="img">
+        <a href="{% url 'index' %}show-{{ k.id }}.html" title="{{ k.title }}">
+        <img src="{% url 'index' %}media/{{ k.img }}"
+         srcset="{% url 'index' %}media/{{ k.img }}" alt="{{ k.title }}" 
+            class="wp-post-image" width="120" height="80"/>
+        </a>
+        </div>
+        <div class="text">
+        <a href="{% url 'index' %}show-{{ k.id }}.html" title="{{ k.title }}"
+                   target="_blank">{{ k.title }}</a>
+        </div>
+       </li>
+{% endfor %}
+</ul>
+
+<div class="tags">
+    {% for tag in tags %}
+        <a href="{% url 'index' %}tag/{{ tag.name }}">{{ tag.name }}</a>
+    {% endfor %}
+</div>
