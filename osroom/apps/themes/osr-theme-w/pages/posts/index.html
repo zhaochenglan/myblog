@@ -1,0 +1,26 @@
+{% extends "osr-theme-w/pages/based/based.html" %}
+{% block title %}{{_("文章列表")}}-{% endblock %}
+{% block content %}
+<div id="app" v-cloak>
+    <div class="row osr-page">
+            <!--文章导航-->
+            <div id="post-sort" class="nav osr-btn-nav text-center" style="color:#ffffff;">
+                <button  id="post-sort-t-desc" :style="'background-color:'+colors[0]" class="btn osr-btn btn-m"
+                         v-on:click="get_posts(1,'t-desc')">
+                     <i class="fa fa-file-text-o"></i>&nbsp;{{_("最新")}}
+                </button>&nbsp;
+                <button id="post-sort-hot" :style="'background-color:'+colors[1]" class="btn osr-btn btn-m"
+                         v-on:click="get_posts(1,'hot')">
+                     <i class="fa fa-thermometer-full"></i>&nbsp;{{_("热门")}}
+                </button>&nbsp;
+                <a id="post-sort-tag" :style="'color:#ffffff;background-color:'+colors[2]" class="btn osr-btn btn-m" href="/corpus/tag">
+                     <i class="fa fa-tag"></i>&nbsp;{{_("标签")}}
+                </a>&nbsp;
+
+            </div>
+            {% include "osr-theme-w/pages/posts/_posts_weiget.html" %}
+
+    </div>
+</div>
+{% include "osr-theme-w/pages/posts/_script.html" %}
+{% endblock %}

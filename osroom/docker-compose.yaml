@@ -1,0 +1,59 @@
+# Use root/example as user/password credentials
+version: '3.1'
+services:
+  mongo:
+    image: mongo
+    restart: always
+    container_name: my_mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - my-mongo:/data/db
+    ports:
+      - '27017:27017'
+    expose:
+      - '27017'
+  mongo-express:
+    image: mongo-express
+    container_name: my_mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: user
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+    
+  redis:
+    image: "redis:alpine"
+    container_name: my_redis
+    command: redis-server --requirepass password
+    ports:
+     - "6379:6379"
+    volumes:
+     - my-redis:/var/lib/redis
+    environment:
+     - REDIS_REPLICATION_MODE=master
+  db:
+    image: mysql:5.7
+    container_name: my_mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'blog'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3307:3306'
+    expose:
+      - '3307'
+    volumes:
+      - my-db:/var/lib/mysql
+# Names our volume
+volumes:
+  my-db:
+    driver: local
+  my-redis:
+    driver: local
+  my-mongo:
+    driver: local

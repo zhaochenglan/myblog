@@ -25,6 +25,8 @@ urlpatterns = [
     re_path(r'mdeditor/', include('mdeditor.urls')),
     path('', views.index),
     path('index', views.index),
+    path('dev-api/vue-element-admin/user/login', views.login),
+
 ]
 if settings.DEBUG:
     # static files (images, css, javascript, etc.)

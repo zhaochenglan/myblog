@@ -1,0 +1,41 @@
+<!DOCYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{ user.name }}'s Watchlist </title>
+   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+   <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+   <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+{% set navigation %}
+<h1><li><a href="{{url_for('index') }}">Home</li></h1>
+{%endset %}
+{{ navigation }}
+{{ navigation }}
+{{ name }}
+<a href="{{ url_for('index')}}"> $larr;Return</a>
+<h2>{{user.username }}</h2>
+{% if user.edgar %}
+    <i>{{user.edgar}} </li>
+{% endif %}
+
+<h5>{{user.username }}'s Watchlist ({{ movies|length }}): </h5>
+
+<u1>
+{% for movie in movies %}
+<li>{{movie.name }} - {{movie.year}}</li>
+</u1>
+{% endfor %}
+<form method="post" class="form-horizontal">
+{{form.csrf_token}}
+{{form.username.label}}{{form.username(required='')}}<br>
+{{form.password.label}}{{form.password}}<br>
+{% for msg in form.password.errors %}
+<small class="alert alert-secondary" role="alert">{{msg }}</small><br>
+{% endfor %}
+{{form.remember.label}}{{form.remember.label}}<br>
+{{form.submit}}<br>
+</form>
+</body>
+</html>
