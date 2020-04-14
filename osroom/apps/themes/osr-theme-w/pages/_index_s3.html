@@ -8,7 +8,7 @@
                 <div class="osr-post-image">
                     <a target="_blank" :href="'/post?id='+post._id">
                         <img v-if="post.cover_url" class="osr-media-img" :src="post.cover_url+img_w_h" :alt="post.title">
-                        <img v-else class="osr-media-img" src="{{g.site_global.theme_config.FREE['post_cover_url']}}" :alt="post.title">
+                        <img v-else class="osr-media-img" src="{{g.site_global.theme_config.FREE['post_cover']['url']}}" :alt="post.title">
                          <span class="osr-img-title"  :title="post.title">
                              {[post.title]}
                          </span>
