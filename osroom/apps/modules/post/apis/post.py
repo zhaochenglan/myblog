@@ -32,6 +32,7 @@ def api_post_tags():
         data = get_tags()
     else:
         data = {"msg_type": "w", "msg": METHOD_WARNING, "custom_status": 405}
+    print("tag data:", data.keys)
     return response_format(data)
 
 

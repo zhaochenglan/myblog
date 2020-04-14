@@ -18,6 +18,7 @@
                       <i class="fa fa-cog"></i>
                     </a>
                 </div>
+               
                 <div class="pull-right input-group">
                     <div class="btn-group-md">
                         <button onclick="save(0)" v-model="save_name" class="btn osr-btn btn-info osr-submit-btn">
@@ -46,9 +47,16 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                             <h4 class="modal-title">{{_('添加标签')}}</h4>
                         </div>
+                         <div id="select-tag" class="container-fluid">
+                                        <v-select :placeholder="placeholder" 
+                                            multiple 
+                                        :options="options" label="name" :value.sync="students"></v-select>
+                                <div id="value">{{students}}</div>  
+                        </div>
                         <div class="modal-body">
                             <input type="text" class="form-control osr-input" v-model="tag" placeholder="{{_('可以在这里添加标签哦')}}" maxlength="10">
                             <br>
+                            
                             <div class="btn-group">
                                 <button onclick="add_tag()" class="btn-sm btn osr-btn btn-info">
                                     {{_('添加')}}
@@ -111,7 +119,22 @@
 <script src="/theme/osr-theme-w/static/js/highlight.js?v={{g.site_global.site_config.STATIC_FILE_VERSION}}"></script>
 
 <script>
+    Vue.component('v-select', VueSelect.VueSelect);
 
+   new Vue({
+      el: '#select-tag',
+      data: function() {
+        return {
+          options: [
+            {"student_id": 1, "name": "Vence"},
+            {"student_id": 2, "name": "Job"},
+            {"student_id": 3, "name": "Jack"},
+          ],
+          placeholder: 'Choose a student..',
+          students: []
+        }
+      },
+    });
     var vue = new Vue({
       el: '#app',
       delimiters:['{[', ']}'],

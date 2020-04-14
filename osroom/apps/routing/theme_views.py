@@ -20,7 +20,7 @@ from apps.utils.format.time_format import time_to_utcdate
 @theme_view.route('/', methods=['GET', 'POST'])
 @page_permission_required()
 def index():
-    return get_render_template("index")
+    return get_render_template(path="index")
 
 
 # other
@@ -34,6 +34,8 @@ def pages(path):
         :param path:
         :return:
     """
+    print(11111, path, static_html_view.url_prefix)
+    print(path.startswith(static_html_view.url_prefix.strip("/")))
     if path.startswith(static_html_view.url_prefix.strip("/")):
         return static_html(path)
     return get_render_template(path.rstrip("/"))
@@ -92,7 +94,8 @@ def get_render_template(path):
     :return:
     """
     # 拼接当前主题目录
-    path = "{}/pages/{}".format(get_config("theme", "CURRENT_THEME_NAME"), path)
+    path = "{}/pages/{}".format(get_config("theme",
+                                           "CURRENT_THEME_NAME"), path)
     absolute_path = os.path.abspath(
         "{}/{}.html".format(theme_view.template_folder, path))
     if not os.path.isfile(absolute_path):
@@ -105,6 +108,8 @@ def get_render_template(path):
     data = dict(request.args.items())
     g.site_global = dict(g.site_global,
                          **get_global_site_data(req_type="view"))
+    print(g.site_global['theme_config']['FREE']['post_cover']['url'])
+    print('{}.html'.format(path))
     return render_template('{}.html'.format(path), data=data)
 
 
@@ -176,7 +181,8 @@ def sitemap():
 <urlset  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     {content}
 </urlset>""".format(content=content)
-    absolute_path = os.path.abspath("{}/sitemap.xml".format(static_html_view.template_folder))
+    absolute_path = os.path.abspath(
+        "{}/sitemap.xml".format(static_html_view.template_folder))
     with open(absolute_path, "w") as wf:
         wf.write(content)
     return send_file(absolute_path)

@@ -1,4 +1,5 @@
-[{
+[
+	{
 		"name": "about_us",
 		"category": "协议说明",
 		"type": "text",
@@ -39,8 +40,11 @@
 		"type": "text",
 		"link": "",
 		"title": "Photo页面导航",
-		"code":["城市","风光"],
-		"code_type":"json",
+		"code": [
+			"城市",
+			"风光"
+		],
+		"code_type": "json",
 		"text_html": "导航是[多媒体>图库]中的任一[分类名称]",
 		"text": "导航是[多媒体>图库]中的任一[分类名称]"
 	},
@@ -98,7 +102,7 @@
 		"category": "首页展示",
 		"type": "text",
 		"title": "Home页面文章Tags展示开关, 不需要展示则关闭开关",
-		"switch":1,
+		"switch": 1,
 		"link": "",
 		"text": "管理端->主题展示设置->图文里添加或修改，删除"
 	},
@@ -107,7 +111,7 @@
 		"category": "其他图片",
 		"type": "image",
 		"title": "主题Top背景图backgroud_url",
-		"switch":1,
+		"switch": 1,
 		"link": "",
 		"text": "/osr-admin/setting/config-edit?project=theme_global_conf, FREE中添加一个KEY: backgroud_url, Value为该图片链接"
 	},
@@ -115,10 +119,9 @@
 		"name": "设置请看以下链接",
 		"category": "其他图片",
 		"type": "image",
-		"title": "文章默认图片post_cover_url",
-		"switch":1,
-		"link": "",
+		"title": "/static/sys_imgs/blog_content.png",
+		"switch": 1,
+		"link": "/static/sys_imgs/blog_content.png",
 		"text": "/osr-admin/setting/config-edit?project=theme_global_conf, FREE中添加一个KEY: post_cover_url, Value为该图片链接"
 	}
-
 ]

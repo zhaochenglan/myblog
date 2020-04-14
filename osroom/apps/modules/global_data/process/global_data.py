@@ -49,7 +49,7 @@ def get_global_site_data(req_type="api"):
                     {"status": "not_noticed"},
                     {"status": {"$exists": False}}
                 ]},
-                {"_id": 0, "content": 0}
+            {"_id": 0, "content": 0}
         )
         msg_cnt = msgs.count(True)
         data["user_msg"] = {"msg_count": msg_cnt,
@@ -157,13 +157,16 @@ def get_global_media(dbname, collname):
         for condition in conditions:
             if "name_regex" in condition and condition["name_regex"]:
                 q["type"] = condition["type"]
-                q["name"] = {"$regex": condition["name_regex"], "$options": "$i"}
-                temp_media = list(mdb.dbs[collname].find(q,  regular_escape=False).sort([("name", 1)]))
+                q["name"] = {
+                    "$regex": condition["name_regex"], "$options": "$i"}
+                temp_media = list(mdb.dbs[collname].find(
+                    q,  regular_escape=False).sort([("name", 1)]))
             else:
                 q["type"] = condition["type"]
                 q["name"] = {"$in": condition["names"]}
 
-                temp_media = list(mdb.dbs[collname].find(q).sort([("name", 1)]))
+                temp_media = list(
+                    mdb.dbs[collname].find(q).sort([("name", 1)]))
 
             for d in temp_media:
                 d["_id"] = str(d["_id"])

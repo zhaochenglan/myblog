@@ -69,6 +69,7 @@ def get_posts_pr(
             query_conditions["user_id"] = current_user.str_id
     # 是否使用缓存, 按以下条件决定
     use_cache = False
+    print("status:", status)
     if status == "no_issued":
         query_conditions['$or'] = [
             {
@@ -86,10 +87,10 @@ def get_posts_pr(
         query_conditions['is_delete'] = 0
         # 没有审核, 而且默认评分涉嫌违规的
         query_conditions['audited'] = 0
-        query_conditions['audit_score'] = {
+        '''query_conditions['audit_score'] = {
             "$gte": get_config(
                 "content_inspection",
-                "ALLEGED_ILLEGAL_SCORE")}
+                "ALLEGED_ILLEGAL_SCORE")}'''
 
     elif status == "unqualified":
         query_conditions['issued'] = 1
@@ -119,6 +120,7 @@ def get_posts_pr(
 
         query_conditions['issued'] = 1
         query_conditions['is_delete'] = 0
+        query_conditions['audited'] = 1
         query_conditions['audit_score'] = {
             "$lt": get_config(
                 "content_inspection",
@@ -256,6 +258,7 @@ def get_post_pr(
     """
     data = {}
     query_conditions = {}
+    print("query_conditions:", query_conditions)
     if isinstance(other_filter, dict):
         query_conditions = deepcopy(other_filter)
 
@@ -310,7 +313,7 @@ def delete_post(ids=[]):
         for post in posts:
             # 删用户的post喜欢标记
             mdbs["user"].db.user_like.update_many({"type": "post", "values": str(post["_id"])},
-                                              {"$pull": {"values": str(post["_id"])}})
+                                                  {"$pull": {"values": str(post["_id"])}})
 
             # 删图片
             for img in post["imgs"]:

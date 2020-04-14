@@ -2,6 +2,14 @@
 # -*-coding:utf-8-*-
 # @Time : 2017/11/1 ~ 2019/9/1
 # @Author : Allen Woo
+from apps.configs.sys_config import MODULES, LOG_PATH
+from apps.init_core_module import init_core_module
+from apps.core.flask.module_import import module_import
+from apps.app import app
+from flask_script import Manager
+from apps.core.db.mongodb import MyMongo
+from apps.core.utils.update_sys_data import update_mdb_collections, init_datas, compatible_processing, \
+    update_mdbcolls_json_file
 import os
 import sys
 from signal import signal, SIGCHLD, SIG_IGN
@@ -33,9 +41,6 @@ if "--push-url" in sys.argv:
     sys.argv.remove("--push-url")
 
 # 网站还未启动的时候, 临时连接数据库, 更新collections & 更新系统配置
-from apps.core.utils.update_sys_data import update_mdb_collections, init_datas, compatible_processing, \
-    update_mdbcolls_json_file
-from apps.core.db.mongodb import MyMongo
 database = DatabaseConfig()
 mdbs = {}
 for k, mdb_acc in DB_CONFIG["mongodb"].items():
@@ -111,11 +116,6 @@ for mdb in mdbs.values():
     mdb.close()
 
 # 启动网站
-from flask_script import Manager
-from apps.app import app
-from apps.core.flask.module_import import module_import
-from apps.init_core_module import init_core_module
-from apps.configs.sys_config import MODULES, LOG_PATH
 
 init_core_module(
     app,

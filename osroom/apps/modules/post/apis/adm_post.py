@@ -57,6 +57,7 @@ def api_adm_post():
     """
 
     if request.c_method == "GET":
+        print('111:', request.argget.all('post_id'))
         if request.argget.all('post_id'):
             data = adm_get_post()
         else:

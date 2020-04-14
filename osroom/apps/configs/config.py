@@ -421,7 +421,7 @@ CONFIG = {
     "theme_global_conf": {
         "FREE": {
             "sort": 99,
-            "value": {"post_cover": {"url": "<url>", "name": "文章默认图片封面"}},
+            "value": {"post_cover": {"url": "/static/sys_imgs/blog_content.png", "name": "文章默认图片封面"}},
             "type": "dict",
             "info": "提供给主题的自由设置项, 可以在此自由添加各种设置(需要主题支持)格式:标准Json"
         },

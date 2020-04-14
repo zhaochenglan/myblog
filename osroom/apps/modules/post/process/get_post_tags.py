@@ -40,6 +40,7 @@ def get_tags():
     if data != cache.cache_none:
         return data
     else:
+        print("async")
         # 调用生成缓存程序生成新缓存
         async_get_tags.apply_async(
             kwargs={
@@ -64,6 +65,7 @@ def async_get_tags(user_id, last_days, tlimit, sort):
     :param sort:
     :return:
     """
+    print("celery:")
     _get_tags(user_id=user_id, last_days=last_days, tlimit=tlimit, sort=sort)
 
 
@@ -95,6 +97,7 @@ def _get_tags(user_id, last_days, tlimit, sort):
     ], allowDiskUse=True)
     data = {"tags": []}
     temp_tags = []
+    print("rrrrrrrrrrrrrrrrr:", r)
     for result in r:
         tr = {
             "tag": result["_id"],
@@ -126,7 +129,8 @@ def _get_tags(user_id, last_days, tlimit, sort):
             tag["tag_cnt"] = 0
 
     # sort
-    data["tags"] = sorted(data["tags"], key=lambda x: x["tag_cnt"], reverse=True)
+    data["tags"] = sorted(
+        data["tags"], key=lambda x: x["tag_cnt"], reverse=True)
     # 保留一份长期缓存
     cache.set(
         key="LAST_POST_TAGS_CACHE",

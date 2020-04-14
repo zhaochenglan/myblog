@@ -21,7 +21,7 @@ def parameter_processing(sys_argv):
     }
     # debug
     if "--debug" not in sys_argv and "-D" not in sys_argv:
-        result["is_debug"] = False
+        result["is_debug"] = True
     else:
         result["upd_conf"] = False
         result["push_url"] = False
@@ -44,4 +44,3 @@ def parameter_processing(sys_argv):
         result["push_url"] = True
     result["sys_argv"] = sys_argv
     return result
-

@@ -17,6 +17,7 @@ from apps.modules.global_data.process.global_data import get_global_site_data
 @osr_login_required
 @adm_page_permission_required()
 def index():
+    print(123123123123123123)
     return get_render_template("index")
 
 
