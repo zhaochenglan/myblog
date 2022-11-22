@@ -7,7 +7,7 @@ django-timezone-field==3.0
 djangorestframework==3.9.0
 djangorestframework-jwt==1.11.0
 django-mptt==0.10.0
-Pillow==5.0.0
+Pillow==9.3.0
 django-mdeditor==0.1.17
 markdown==3.2.1
 django-simpleui==3.9
